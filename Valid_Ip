@@ -1,0 +1,106 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+ 
+int main()
+{
+ int i,z=1,k,num[4],cnt=0,anum[4],j;
+ char s[17];
+ cout<<"Enter an ip address"<<endl;
+ cin>>s;
+ cout<<"Enterred ip address by the user is :"<<s<<endl;
+ 
+ for(i=0;i<strlen(s);i++)
+   {
+   	if(s[i]=='.')
+   	z=z+1;
+    } 
+    
+    if(strlen(s)>6 && strlen(s)<16 && s[0]!='.' && z==4)
+	{
+    	
+    	z=0;
+    	while(j<strlen(s)+1)
+    	{
+             k=j;
+			 while(!(s[k]=='.' || s[k]== '\0')&& k<strlen(s)) // loop to convert char to int 
+			 {  
+			 	num[cnt]=s[k]-'0';                
+			 	cnt++;                        //to keep track of digits in te number
+			 	k++;
+			 	
+			}  		
+    		
+    		//for one digit
+    		if(cnt==1)
+    		{
+    			anum[z]=num[0];
+    			j=j+1;
+    			z++;
+			}
+			//for two digit 
+			else if(cnt==2)
+			{
+				anum[z]=num[0]*10+num[1];
+				j+=2;
+				z++;
+			}
+            //for three digit 
+			else if(cnt==3)
+			{
+				anum[z]=num[0]*100+num[1]*10+num[2];
+				j+=3;
+				z++;
+						}			
+			else{
+				j++;
+			}
+              cnt=0;
+		}
+		int z=0,j=0;
+		while(z<4){
+			if(!(anum[z]<=255 && anum[z]>=0)){
+				cout<<"error"<<endl;
+				j=1;
+				break;
+				
+			}
+			z++;
+		}
+		if(j==0)
+		{
+			cout<<"you have entered correct ip address"<<endl;
+			for(i=0;i<4;i++){
+				if(i==3)
+				cout<<anum[i]<<endl;
+				else
+				cout<<anum[i]<<".";
+			}
+			cout<<"Now let's find the class to which it belongs"<<endl;
+      	if(0 <= anum[0] && anum[0]<128)
+	    	cout<<"It's class A"<<endl;
+    	else if(127<anum[0] && anum[0]<192)
+		cout<<"It's class B"<<endl;
+	    else if(191<anum[0] && anum[0]<224)
+		 cout<<"It's class C"<<endl;
+	    else if(223<anum[0] && anum[0]<240)
+		  cout<<"It's class D"<<endl;
+	    else if(239<anum[0] && anum[0]<256)
+		  cout<<"It's class E"<<endl;
+	    else
+		 cout<<"Out of range"<<endl;
+        }
+    }
+        else 
+          cout<<"Invalid address"<<endl;
+        return 0;
+    }
+	
+	
+    
+    
+    
+    
+ 
